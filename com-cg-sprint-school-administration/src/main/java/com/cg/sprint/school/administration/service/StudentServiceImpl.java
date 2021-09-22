@@ -23,18 +23,6 @@ public class StudentServiceImpl {
 
 	@Autowired
 	ComplaintRepository complaintRepository;
-//	
-//	@Autowired
-//	CourseRepository courseRepository;
-//	
-//	@Autowired
-//	HomeworkRepository homeworkRepository;
-//	
-//	@Autowired
-//	NoticeRepository noticeRepository;
-//	
-//	@Autowired
-//	StudyMaterialRepository studyMaterialRepository;
 
 	@Autowired
 	TeacherRepository teacherRepository;
@@ -52,12 +40,13 @@ public class StudentServiceImpl {
 		}
 	}
 
+	// display all student
 	public List<Student> getAllStudent() {
 		LOG.info("getAllStudent");
 		return (List<Student>) studentRepository.findAll();
 	}
 
-	// Display Students
+	// Display Students by Id
 	public Student getStudentById(int studentId) throws StudentNotFoundException {
 		LOG.info("getStudentById " + studentId);
 		Optional<Student> optStudent = studentRepository.findById(studentId);
@@ -81,6 +70,7 @@ public class StudentServiceImpl {
 		return studentId;
 	}
 
+	//Add Complaint
 	public Complaint addComplaint(Complaint complaint) throws IllegalArgumentException {
 		LOG.info("addComplaint");
 		try {
@@ -91,11 +81,14 @@ public class StudentServiceImpl {
 		}
 	}
 
+	//Display all complaint
 	public List<Complaint> getAllComplaint() {
 		LOG.info("getAllCompalint");
 		return (List<Complaint>) complaintRepository.findAll();
 	}
 
+	
+	//Display complaint by Id
 	public Complaint getComplaintById(int complaintId) throws ComplaintNotFoundException {
 		LOG.info("getComplaintById " + complaintId);
 		Optional<Complaint> optComplaint = complaintRepository.findById(complaintId);

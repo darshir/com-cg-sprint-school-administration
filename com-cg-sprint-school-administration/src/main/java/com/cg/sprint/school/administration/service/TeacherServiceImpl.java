@@ -26,9 +26,6 @@ public class TeacherServiceImpl {
 	@Autowired
 	HomeworkRepository homeworkRepository;
 
-//	@Autowired
-//	NoticeRepository noticeRepository;
-//
 	@Autowired
 	StudyMaterialRepository studyMaterialRepository;
 
@@ -45,12 +42,13 @@ public class TeacherServiceImpl {
 		}
 	}
 
+	//display all Teachers
 	public List<Teacher> getAllTeacher() {
 		LOG.info("getAllTeacher");
 		return (List<Teacher>) teacherRepository.findAll();
 	}
 
-	// Display Teachers
+	// Display Teacher By Id
 	public Teacher getTeacherById(int teacherId) throws TeacherNotFoundException {
 		LOG.info("getTeacherById " + teacherId);
 		Optional<Teacher> optTeacher = teacherRepository.findById(teacherId);
@@ -85,11 +83,13 @@ public class TeacherServiceImpl {
 		}
 	}
 
+	//Display course
 	public List<Course> getAllCourse() {
 		LOG.info("getAllCourse");
 		return (List<Course>) courseRepository.findAll();
 	}
 
+	//Display Course By Id
 	public Course getCourseById(int courseId) throws CourseNotFoundException {
 		LOG.info("getcourseById " + courseId);
 		Optional<Course> optCourse = courseRepository.findById(courseId);
@@ -124,11 +124,13 @@ public class TeacherServiceImpl {
 		}
 	}
 
+	//Display StudyMaterials
 	public List<StudyMaterial> getAllStudyMaterial() {
 		LOG.info("getAllStudyMaterial");
 		return (List<StudyMaterial>) studyMaterialRepository.findAll();
 	}
 
+	//Display StudyMaterial By Id
 	public StudyMaterial getStudyMaterialById(int studyId) throws StudyMaterialNotFoundException {
 		LOG.info("getStudyMaterialById " + studyId);
 		Optional<StudyMaterial> optStudyMaterial = studyMaterialRepository.findById(studyId);
@@ -163,11 +165,13 @@ public class TeacherServiceImpl {
 		}
 	}
 
+	//Display HomeWork
 	public List<Homework> getAllHomework() {
 		LOG.info("getAllHomework");
 		return (List<Homework>) homeworkRepository.findAll();
 	}
 
+	//Display Homework By Id
 	public Homework getHomeworkById(int homeId) throws HomeworkNotFoundException {
 		LOG.info("getHomeworkById " + homeId);
 		Optional<Homework> optHomework = homeworkRepository.findById(homeId);

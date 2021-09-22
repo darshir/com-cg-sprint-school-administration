@@ -30,8 +30,7 @@ public interface StudentService {
 	public List<Complaint> getAllComplaint();
 	
 	public Optional<Complaint> getComplaintById(int complaintId) throws ComplaintNotFoundException;
-	
-	
+		
 	public List<Complaint> getComplaintByDate(Date date) throws ComplaintNotFoundException;
 	
 	public Complaint updateComplaint(Complaint complaint);
