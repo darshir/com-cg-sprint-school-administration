@@ -78,7 +78,7 @@ public class StudentController {
 	}
 
 	// http://localhost:8082/student/getComplaintById/1
-	@GetMapping("/student/getComplaintById/complaintId}")
+	@GetMapping("/student/getComplaintById/{complaintId}")
 	public ResponseEntity<Complaint> getComplaintById(@PathVariable int complaintId) {
 		LOG.info("getComplaint");
 		Complaint com = complaintService.getComplaintById(complaintId);
@@ -96,7 +96,6 @@ public class StudentController {
 	@DeleteMapping("/student/deleteComplaint/{complaintId}")
 	public int deleteComplaint(@PathVariable int complaintId) {
 		LOG.info("deleteComplaint");
-
 		return complaintService.deleteComplaint(complaintId);
 
 	}
@@ -128,7 +127,7 @@ public class StudentController {
 	}
 
 	// http://localhost:8082/student/getCourseById/1
-	@GetMapping("/student/getCourseById/courseId}")
+	@GetMapping("/student/getCourseById/{courseId}")
 	public ResponseEntity<Course> getCourseById(@PathVariable int courseId) {
 		LOG.info("getCourse");
 		Course cou = courseService.getCourseById(courseId);
@@ -145,7 +144,7 @@ public class StudentController {
 	}
 
 	// http://localhost:8082/student/getStudyMaterialById/1
-	@GetMapping("/student/getStudyMaterialById/studyId}")
+	@GetMapping("/student/getStudyMaterialById/{studyId}")
 	public ResponseEntity<StudyMaterial> getStudyMaterialById(@PathVariable int studyId) {
 		LOG.info("getStudyMaterial");
 		StudyMaterial sm = studyMaterialService.getStudyMaterialById(studyId);
@@ -162,7 +161,7 @@ public class StudentController {
 	}
 
 	// http://localhost:8082/student/getHomeworkById/1
-	@GetMapping("/student/getHomeworkById/studyId}")
+	@GetMapping("/student/getHomeworkById/{homeId}")
 	public ResponseEntity<Homework> getHomeworkById(@PathVariable int homeId) {
 		LOG.info("getHomework");
 		Homework hw = homeworkService.getHomeworkById(homeId);

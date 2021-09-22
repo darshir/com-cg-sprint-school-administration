@@ -12,10 +12,7 @@ import com.cg.sprint.school.administration.model.Complaint;
 @Repository
 public interface ComplaintRepository extends CrudRepository<Complaint, Integer> {
 
-//    List<Complaint> findById(String complaintId);
-//
-    
-//
+
    List<Complaint> findByDate(Date date);
 
 }

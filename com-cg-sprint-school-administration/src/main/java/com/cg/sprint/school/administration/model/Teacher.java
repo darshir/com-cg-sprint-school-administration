@@ -83,42 +83,6 @@ public class Teacher implements Serializable {
 		return "Teacher [teacherId=" + teacherId + ", teacherName=" + teacherName + ", admin=" + admin + "]";
 	}
 
-	
-//	public Teacher(String teacherId, String teacherName, String teacherPassword) {
-//		super();
-//		this.teacherId = teacherId;
-//		this.teacherName = teacherName;
-//		this.teacherPassword = teacherPassword;
-//	}
-//
-//	public String getTeacherId() {
-//		return teacherId;
-//	}
-//
-//	public void setTeacherId(String teacherId) {
-//		this.teacherId = teacherId;
-//	}
-//
-//	public String getTeacherName() {
-//		return teacherName;
-//	}
-//
-//	public void setTeacherName(String teacherName) {
-//		this.teacherName = teacherName;
-//	}
-//
-//	public String getTeacherPassword() {
-//		return teacherPassword;
-//	}
-//
-//	public void setTeacherPassword(String teacherPassword) {
-//		this.teacherPassword = teacherPassword;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Teacher [teacherId=" + teacherId + ", teacherName=" + teacherName + ", teacherPassword=" + teacherPassword
-//				+ "]";
-//	}
+
 
 }

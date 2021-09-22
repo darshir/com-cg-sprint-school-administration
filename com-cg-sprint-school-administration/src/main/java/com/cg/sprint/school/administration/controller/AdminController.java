@@ -9,14 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.sprint.school.administration.exception.AdminNotFoundException;
 import com.cg.sprint.school.administration.exception.ComplaintNotFoundException;
 import com.cg.sprint.school.administration.exception.CourseNotFoundException;
 import com.cg.sprint.school.administration.exception.NoticeNotFoundException;
@@ -37,7 +40,6 @@ import com.cg.sprint.school.administration.service.StudentService;
 import com.cg.sprint.school.administration.service.StudentServiceImpl;
 import com.cg.sprint.school.administration.service.TeacherService;
 import com.cg.sprint.school.administration.service.TeacherServiceImpl;
-
 
 @RestController
 public class AdminController {
@@ -90,7 +92,9 @@ public class AdminController {
 		LOG.info("getAdmin");
 		Admin adm = adminService.getAdminById(adminId);
 		return new ResponseEntity<Admin>(adm, HttpStatus.OK);
+
 	}
+
 
 	// http://localhost:8082/addStudent
 	@PostMapping("/addStudent")
@@ -180,7 +184,7 @@ public class AdminController {
 	}
 
 	// http://localhost:8082/getComplaintById/1
-	@GetMapping("/getComplaintById/complaintId}")
+	@GetMapping("/getComplaintById/{complaintId}")
 	public ResponseEntity<Complaint> getComplaintById(@PathVariable int complaintId) {
 		LOG.info("getComplaint");
 		Complaint com = complaintService.getComplaintById(complaintId);
@@ -255,7 +259,7 @@ public class AdminController {
 	}
 
 	// http://localhost:8082/getStudyMaterialById/1
-	@GetMapping("/getStudyMaterialById/studyId}")
+	@GetMapping("/getStudyMaterialById/{studyId}")
 	public ResponseEntity<StudyMaterial> getStudyMaterialById(@PathVariable int studyId) {
 		LOG.info("getStudyMaterial");
 		StudyMaterial sm = studyMaterialService.getStudyMaterialById(studyId);
@@ -281,12 +285,11 @@ public class AdminController {
 	}
 
 	// http://localhost:8082/getHomeworkById/1
-	@GetMapping("/getHomeworkById/studyId}")
+	@GetMapping("/getHomeworkById/{homeId}")
 	public ResponseEntity<Homework> getHomeworkById(@PathVariable int homeId) {
 		LOG.info("getHomework");
 		Homework hw = homeworkService.getHomeworkById(homeId);
 		return new ResponseEntity<Homework>(hw, HttpStatus.OK);
 	}
-
 
 }

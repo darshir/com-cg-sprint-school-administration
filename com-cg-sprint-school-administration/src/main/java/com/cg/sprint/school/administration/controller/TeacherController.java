@@ -39,7 +39,7 @@ import com.cg.sprint.school.administration.service.TeacherService;
 import com.cg.sprint.school.administration.service.TeacherServiceImpl;
 
 @RestController
-@RequestMapping(path = "school-admin/teacher")
+//@RequestMapping(path = "school-admin/teacher")
 public class TeacherController {
 	@Autowired
 	private TeacherServiceImpl teacherService;
@@ -92,7 +92,7 @@ public class TeacherController {
 	}
 
 	// http://localhost:8082/teacher/getCourseById/1
-	@GetMapping("/teacher/getCourseById/courseId}")
+	@GetMapping("/teacher/getCourseById/{courseId}")
 	public ResponseEntity<Course> getCourseById(@PathVariable int courseId) {
 		LOG.info("getCourse");
 		Course cou = courseService.getCourseById(courseId);
@@ -132,7 +132,7 @@ public class TeacherController {
 	}
 
 	// http://localhost:8082/teacher/getStudyMaterialById/1
-	@GetMapping("/teacher/getStudyMaterialById/studyId}")
+	@GetMapping("/teacher/getStudyMaterialById/{studyId}")
 	public ResponseEntity<StudyMaterial> getStudyMaterialById(@PathVariable int studyId) {
 		LOG.info("getStudyMaterial");
 		StudyMaterial sm = studyMaterialService.getStudyMaterialById(studyId);
@@ -172,7 +172,7 @@ public class TeacherController {
 	}
 
 	// http://localhost:8082/teacher/getHomeworkById/1
-	@GetMapping("/teacher/getHomeworkById/studyId}")
+	@GetMapping("/teacher/getHomeworkById/{homeId}")
 	public ResponseEntity<Homework> getHomeworkById(@PathVariable int homeId) {
 		LOG.info("getHomework");
 		Homework hw = homeworkService.getHomeworkById(homeId);

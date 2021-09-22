@@ -26,7 +26,7 @@ import com.cg.sprint.school.administration.repository.NoticeRepository;
 import com.cg.sprint.school.administration.repository.StudentRepository;
 import com.cg.sprint.school.administration.repository.TeacherRepository;
 
-//@Service("adminService")
+
 @Service
 public class AdminServiceImpl {
 
@@ -81,8 +81,13 @@ public class AdminServiceImpl {
 	// Delete Admin
 	public int deleteAdmin(int adminId) {
 		LOG.info("deleteAdmin");
+		try {
 		adminRepository.deleteById(adminId);
 		return adminId;
+		}catch(AdminNotFoundException ex) {
+			LOG.error("Admin Not Found");
+			return -1;
+		}
 	}
 
 	//Notice Functionalities
@@ -125,8 +130,10 @@ public class AdminServiceImpl {
 	// Delete Notice
 	public int deleteNotice(int noticeId) {
 		LOG.info("deleteNotice");
+		
 		noticeRepository.deleteById(noticeId);
 		return noticeId;
+		
 	}
 
 

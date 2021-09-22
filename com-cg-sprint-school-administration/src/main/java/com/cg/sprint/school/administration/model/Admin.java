@@ -41,12 +41,6 @@ public class Admin implements Serializable {
 		
 	}
 
-//	public Admin(String adminId, String adminName, String adminPassword) {
-//		super();
-//		this.adminId = adminId;
-//		this.adminName = adminName;
-//		this.adminPassword = adminPassword;
-//	}
 
 	public int getAdminId() {
 		return adminId;
@@ -68,18 +62,5 @@ public class Admin implements Serializable {
 		return "Admin [adminId=" + adminId + ", adminName=" + adminName + "]";
 	}
 
-//	public String getAdminPassword() {
-//		return adminPassword;
-//	}
-//
-//	public void setAdminPassword(String adminPassword) {
-//		this.adminPassword = adminPassword;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Admin [adminId=" + adminId + ", adminName=" + adminName + ", adminPassword=" + adminPassword
-//				+ "]";
-//	}
 
 }

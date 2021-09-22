@@ -95,43 +95,6 @@ public class Student implements Serializable {
 		return "Student [studentId=" + studentId + ", studentName=" + studentName + ", admin=" + admin + "]";
 	}
 	
-	
 
-//	public Student(String studentId, String studentName, String studentPassword) {
-//		super();
-//		this.studentId = studentId;
-//		this.studentName = studentName;
-//		this.studentPassword = studentPassword;
-//	}
-//
-//	public String getStudentId() {
-//		return studentId;
-//	}
-//
-//	public void setStudentId(String studentId) {
-//		this.studentId = studentId;
-//	}
-//
-//	public String getStudentName() {
-//		return studentName;
-//	}
-//
-//	public void setStudentName(String studentName) {
-//		this.studentName = studentName;
-//	}
-//
-//	public String getStudentPassword() {
-//		return studentPassword;
-//	}
-//
-//	public void setStudentPassword(String studentPassword) {
-//		this.studentPassword = studentPassword;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Student [studentId=" + studentId + ", studentName=" + studentName + ", studentPassword=" + studentPassword
-//				+ "]";
-//	}
 
 }
