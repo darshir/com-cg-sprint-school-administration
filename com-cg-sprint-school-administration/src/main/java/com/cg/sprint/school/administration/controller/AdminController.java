@@ -28,12 +28,8 @@ import com.cg.sprint.school.administration.model.Complaint;
 import com.cg.sprint.school.administration.model.Course;
 import com.cg.sprint.school.administration.model.Homework;
 import com.cg.sprint.school.administration.model.Notice;
-//import com.cg.sprint.school.administration.model.Complaint;
-//import com.cg.sprint.school.administration.model.Course;
-//import com.cg.sprint.school.administration.model.Notice;
 import com.cg.sprint.school.administration.model.Student;
 import com.cg.sprint.school.administration.model.StudyMaterial;
-//import com.cg.sprint.school.administration.model.StudyMaterial;
 import com.cg.sprint.school.administration.model.Teacher;
 import com.cg.sprint.school.administration.service.AdminService;
 import com.cg.sprint.school.administration.service.AdminServiceImpl;
@@ -42,7 +38,6 @@ import com.cg.sprint.school.administration.service.StudentServiceImpl;
 import com.cg.sprint.school.administration.service.TeacherService;
 import com.cg.sprint.school.administration.service.TeacherServiceImpl;
 
-//@RequestMapping(path = "school-admin/admin")
 
 @RestController
 public class AdminController {
