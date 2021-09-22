@@ -17,7 +17,7 @@ import javax.validation.constraints.NotBlank;
 public class Complaint {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @GeneratedValue(strategy = GenerationType.AUTO)
     private int complaintId;
     
     @NotBlank(message = "Name is mandatory")

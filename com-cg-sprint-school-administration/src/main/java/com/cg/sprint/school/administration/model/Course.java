@@ -16,7 +16,7 @@ public class Course {
     
     @Id
     @Column(name = "COURSE_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private int courseId;
     
     @NotBlank(message = "Name is mandatory")

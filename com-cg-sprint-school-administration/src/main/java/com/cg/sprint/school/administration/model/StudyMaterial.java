@@ -16,7 +16,7 @@ public class StudyMaterial {
 	
 	@Id
 	@Column(name="STUDY_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
     private int studyId;
     
     

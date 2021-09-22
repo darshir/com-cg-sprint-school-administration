@@ -16,7 +16,7 @@ public class Homework {
     
 	@Id
 	@Column(name="HOMEWORK_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
     private int homeId;
     
     
