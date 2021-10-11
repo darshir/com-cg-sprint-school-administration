@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.sprint.school.administration.exception.ComplaintNotFoundException;
 import com.cg.sprint.school.administration.exception.CourseNotFoundException;
 import com.cg.sprint.school.administration.exception.HomeworkNotFoundException;
+import com.cg.sprint.school.administration.exception.IncorrectLoginCredentialsException;
 import com.cg.sprint.school.administration.exception.NoticeNotFoundException;
 import com.cg.sprint.school.administration.exception.StudentNotFoundException;
 import com.cg.sprint.school.administration.exception.StudyMaterialNotFoundException;
@@ -40,6 +41,7 @@ import com.cg.sprint.school.administration.service.StudentServiceImpl;
 import com.cg.sprint.school.administration.service.TeacherServiceImpl;
 
 @RestController
+@RequestMapping(path = "school-admin/student")
 public class StudentController {
 	@Autowired
 	private StudentServiceImpl studentService;
@@ -60,6 +62,13 @@ public class StudentController {
 	private TeacherServiceImpl homeworkService;
 
 	private static final Logger LOG = LoggerFactory.getLogger(StudentController.class);
+	
+	@PostMapping(path = "/loginStudent")
+	public String loginStudent(@RequestBody Student student) {
+		LOG.info("loginStudent");
+		return this.studentService.loginStudent(student);
+	}
+
 
 	// http://localhost:8082/student/addComplaint
 	@PostMapping("/student/addComplaint")

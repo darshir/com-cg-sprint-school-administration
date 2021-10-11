@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.sprint.school.administration.exception.ComplaintNotFoundException;
 import com.cg.sprint.school.administration.exception.CourseNotFoundException;
 import com.cg.sprint.school.administration.exception.HomeworkNotFoundException;
+import com.cg.sprint.school.administration.exception.IncorrectLoginCredentialsException;
 import com.cg.sprint.school.administration.exception.NoticeNotFoundException;
 import com.cg.sprint.school.administration.exception.StudentNotFoundException;
 import com.cg.sprint.school.administration.exception.StudyMaterialNotFoundException;
+import com.cg.sprint.school.administration.model.Admin;
 import com.cg.sprint.school.administration.model.Complaint;
 import com.cg.sprint.school.administration.model.Course;
 import com.cg.sprint.school.administration.model.Homework;
@@ -32,6 +34,7 @@ import com.cg.sprint.school.administration.model.Notice;
 //import com.cg.sprint.school.administration.model.Notice;
 import com.cg.sprint.school.administration.model.Student;
 import com.cg.sprint.school.administration.model.StudyMaterial;
+import com.cg.sprint.school.administration.model.Teacher;
 import com.cg.sprint.school.administration.service.AdminServiceImpl;
 //import com.cg.sprint.school.administration.model.StudyMaterial;
 import com.cg.sprint.school.administration.service.StudentService;
@@ -39,7 +42,7 @@ import com.cg.sprint.school.administration.service.TeacherService;
 import com.cg.sprint.school.administration.service.TeacherServiceImpl;
 
 @RestController
-//@RequestMapping(path = "school-admin/teacher")
+@RequestMapping(path = "school-admin/teacher")
 public class TeacherController {
 	@Autowired
 	private TeacherServiceImpl teacherService;
@@ -57,6 +60,14 @@ public class TeacherController {
 	private AdminServiceImpl noticeService;
 
 	private static final Logger LOG = LoggerFactory.getLogger(StudentController.class);
+	
+	//http://localhost:8082/teacher/loginTeacher
+	@PostMapping(path = "/teacher/loginTeacher")
+	public String loginTeacher(@RequestBody Teacher teacher) {
+		LOG.info("loginTeacher");
+		return this.teacherService.loginTeacher(teacher);
+	}
+
 
 	// http://localhost:8082/teacher/getAllNotice
 	@GetMapping("/teacher/getAllNotice")
@@ -73,13 +84,6 @@ public class TeacherController {
 		LOG.info("getNotice");
 		Notice not = noticeService.getNoticeById(noticeId);
 		return new ResponseEntity<Notice>(not, HttpStatus.OK);
-	}
-
-	// http://localhost:8082/teacher/addCourse
-	@PostMapping("/teacher/addCourse")
-	public Course addCourse(@RequestBody Course course) {
-		LOG.info("addCourse");
-		return courseService.addCourse(course);
 	}
 
 	// http://localhost:8082/teacher/getAllCourse
@@ -107,7 +111,7 @@ public class TeacherController {
 	}
 
 	// http://localhost:8082/teacher/deleteCourse/{coursetId}
-	@DeleteMapping("/taecher/deleteCourse/{courseId}")
+	@DeleteMapping("/teacher/deleteCourse/{courseId}")
 	public int deleteCourse(@PathVariable int courseId) {
 		LOG.info("deleteCourse");
 

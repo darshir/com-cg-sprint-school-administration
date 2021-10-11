@@ -15,83 +15,72 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "COMPLAINT")
 public class Complaint {
-    
-    @Id
-   // @GeneratedValue(strategy = GenerationType.AUTO)
-    private int complaintId;
-    
-    @NotBlank(message = "Name is mandatory")
-    @Column(name = "note")
-    private String note;
 
-    @Column(name = "date")
-    private Date date;
+	@Id
+	// @GeneratedValue(strategy = GenerationType.AUTO)
+	private int complaintId;
+
+	@NotBlank(message = "Name is mandatory")
+	@Column(name = "note")
+	private String note;
+
+	@Column(name = "date")
+	private Date date;
 
 	@ManyToOne
 	@JoinColumn(name = "STUDENT_ID")
-	private Student student;
-    
-    public Complaint() {}
+	private Student studentId;
 
-   
-    
-    
+	public Complaint() {
+	}
 
-    public Complaint(int complaintId, @NotBlank(message = "Name is mandatory") String note, Date date) {
+	public Complaint(int complaintId, @NotBlank(message = "Name is mandatory") String note, Date date) {
 		super();
 		this.complaintId = complaintId;
 		this.note = note;
 		this.date = date;
 	}
 
-
-
-
-
 	public Complaint(int complaintId, @NotBlank(message = "Name is mandatory") String note, Date date,
-			Student student) {
+			Student studentId) {
 		super();
 		this.complaintId = complaintId;
 		this.note = note;
 		this.date = date;
-		this.student = student;
+		this.studentId = studentId;
 	}
 
 	public void setComplaintId(int complaintId) {
-        this.complaintId = complaintId;
-    }
-    
-    public long getComplaintId() {
-        return complaintId;
-    }
-    
-    public void setNote(String note) {
-        this.note = note;
-    }
+		this.complaintId = complaintId;
+	}
 
-    public String getNote() {
-        return note;
-    }
+	public long getComplaintId() {
+		return complaintId;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public void setNote(String note) {
+		this.note = note;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public String getNote() {
+		return note;
+	}
 
-    public Student getStudent(){
-        return student;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setStudent(Student student){
-        this.student = student;
-    }
-    
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Student getStudentId() {
+		return studentId;
+	}
+
 	@Override
 	public String toString() {
-		return "Complaint [complaintId=" + complaintId + ", compalintNote=" + note + ", Date=" + date + ", studentId=" + student
-				+ "]";
+		return "Complaint [complaintId=" + complaintId + ", complaintNote=" + note + ", Date=" + date + ", studentId="
+				+ studentId + "]";
 	}
 }

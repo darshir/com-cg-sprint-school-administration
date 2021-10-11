@@ -9,23 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.sprint.school.administration.exception.AdminNotFoundException;
-import com.cg.sprint.school.administration.exception.ComplaintNotFoundException;
-import com.cg.sprint.school.administration.exception.CourseNotFoundException;
+import com.cg.sprint.school.administration.exception.IncorrectLoginCredentialsException;
 import com.cg.sprint.school.administration.exception.NoticeNotFoundException;
-import com.cg.sprint.school.administration.exception.StudentNotFoundException;
 import com.cg.sprint.school.administration.exception.StudyMaterialNotFoundException;
-import com.cg.sprint.school.administration.exception.TeacherNotFoundException;
 import com.cg.sprint.school.administration.model.Admin;
-import com.cg.sprint.school.administration.model.Complaint;
+import com.cg.sprint.school.administration.model.Course;
 import com.cg.sprint.school.administration.model.Notice;
-
 import com.cg.sprint.school.administration.model.Student;
-import com.cg.sprint.school.administration.model.Teacher;
+import com.cg.sprint.school.administration.model.StudyMaterial;
 import com.cg.sprint.school.administration.repository.AdminRepository;
 import com.cg.sprint.school.administration.repository.NoticeRepository;
 import com.cg.sprint.school.administration.repository.StudentRepository;
 import com.cg.sprint.school.administration.repository.TeacherRepository;
-
+import com.cg.sprint.school.administration.repository.StudyMaterialRepository;
+import com.cg.sprint.school.administration.repository.CourseRepository;
 
 @Service
 public class AdminServiceImpl {
@@ -40,9 +37,43 @@ public class AdminServiceImpl {
 	private TeacherRepository teacherRepository;
 	@Autowired
 	private NoticeRepository noticeRepository;
+	@Autowired
+	private StudyMaterialRepository studyMaterialRepository;
+	@Autowired
+	private CourseRepository courseRepository;
 
+	// Admin Functionalities
 
-	//  Admin Functionalities
+	// Login Function for Admin
+//	public String loginAdmin(Admin admin) {
+//		LOG.info("login Admin");
+//		LOG.info(admin.toString());
+//		Admin admin2 = adminRepository.getById(admin.getAdminId());
+//		LOG.info(admin2.toString());
+//		if (admin.getAdminId()==(admin2.getAdminId()) && admin.getAdminPassword().equals(admin2.getAdminPassword())) {
+//			LOG.info(admin.toString());
+//			LOG.info(admin2.toString());
+//			return "Login Succesful";
+//		} else {
+//			throw new IncorrectLoginCredentialsException("Invalid user name or password.");
+//		}
+//
+//	}
+	
+	public String loginAdmin(Admin admin) {
+		LOG.info("login Admin");
+		LOG.info(admin.toString());
+		Admin admin2 = adminRepository.getById(admin.getAdminId());
+		LOG.info(admin2.toString());
+		if (admin.getAdminId()==(admin2.getAdminId()) && admin.getAdminPassword().equals(admin2.getAdminPassword())) {
+			LOG.info(admin.toString());
+			LOG.info(admin2.toString());
+			return "Login Succesful";
+		} else {
+			throw new IncorrectLoginCredentialsException("Invalid user name or password.");
+		}
+
+	}
 
 	// Add Admin
 	public Admin addAdmin(Admin admin) {
@@ -55,18 +86,18 @@ public class AdminServiceImpl {
 		}
 	}
 
-	//Get Admin By Id
+	// Get Admin By Id
 	public Admin getAdminById(int adminId) throws AdminNotFoundException {
 		LOG.info("getAdminById " + adminId);
 		Optional<Admin> optAdmin = adminRepository.findById(adminId);
 		if (optAdmin.isEmpty()) {
 			LOG.error("Admin not found.");
-			throw new AdminNotFoundException();
+			throw new AdminNotFoundException("The admin with ID " + adminId + " not found");
 		} else
 			return optAdmin.get();
 	}
 
-	//Get All Admin
+	// Get All Admin
 	public List<Admin> getAllAdmin() {
 		LOG.info("getAllAdmin");
 		return adminRepository.findAll();
@@ -82,17 +113,17 @@ public class AdminServiceImpl {
 	public int deleteAdmin(int adminId) {
 		LOG.info("deleteAdmin");
 		try {
-		adminRepository.deleteById(adminId);
-		return adminId;
-		}catch(AdminNotFoundException ex) {
+			adminRepository.deleteById(adminId);
+			return adminId;
+		} catch (AdminNotFoundException ex) {
 			LOG.error("Admin Not Found");
 			return -1;
 		}
 	}
 
-	//Notice Functionalities
-	
-	//Add Notice
+	// Notice Functionalities
+
+	// Add Notice
 	public Notice addNotice(Notice notice) throws IllegalArgumentException {
 		LOG.info("addNotice");
 		try {
@@ -102,21 +133,20 @@ public class AdminServiceImpl {
 			return null;
 		}
 	}
-	
-	//get Notice
+
+	// get Notice
 	public List<Notice> getAllNotice() {
 		LOG.info("getAllNotice");
 		return (List<Notice>) noticeRepository.findAll();
 	}
 
-	
-	//get Notice By Id
+	// get Notice By Id
 	public Notice getNoticeById(int noticeId) throws NoticeNotFoundException {
 		LOG.info("getNoticeById " + noticeId);
 		Optional<Notice> optNotice = noticeRepository.findById(noticeId);
 		if (optNotice.isEmpty()) {
 			LOG.error("No Notice Found.");
-			throw new NoticeNotFoundException();
+			throw new NoticeNotFoundException("The notice with ID " + noticeId + " not found");
 		} else
 			return optNotice.get();
 	}
@@ -128,13 +158,79 @@ public class AdminServiceImpl {
 	}
 
 	// Delete Notice
-	public int deleteNotice(int noticeId) {
-		LOG.info("deleteNotice");
-		
-		noticeRepository.deleteById(noticeId);
-		return noticeId;
-		
+	public boolean removeNotice(int noticeId) throws NoticeNotFoundException {
+		if (noticeRepository.existsById(noticeId)) {
+			noticeRepository.deleteById(noticeId);
+			LOG.info("removeNotice");
+			return true;
+		}
+		LOG.error("Given id does not exist to remove Notice");
+		throw new NoticeNotFoundException("Given id does not exist to remove Notice");
 	}
 
+	// StudyMaterial Functionalities
+
+	// Add StudyMaterial
+	public StudyMaterial addStudyMaterial(StudyMaterial studyMaterial) throws IllegalArgumentException {
+		LOG.info("addStudyMaterial");
+		try {
+			return studyMaterialRepository.save(studyMaterial);
+		} catch (IllegalArgumentException iae) {
+			LOG.error(iae.getMessage());
+			return null;
+		}
+	}
+
+	// get StudyMaterial
+	public List<StudyMaterial> getAllStudyMaterial() {
+		LOG.info("getAllStudyMaterial");
+		return (List<StudyMaterial>) studyMaterialRepository.findAll();
+	}
+
+	// get StudyMaterial By Id
+	public StudyMaterial getStudyMaterialById(int studyId) throws StudyMaterialNotFoundException {
+		LOG.info("getStudyMaterialById " + studyId);
+		Optional<StudyMaterial> optStudyMaterial = studyMaterialRepository.findById(studyId);
+		if (optStudyMaterial.isEmpty()) {
+			LOG.error("No Notice Found.");
+			throw new NoticeNotFoundException("The Study Material with ID " + studyId + " not found");
+		} else
+			return optStudyMaterial.get();
+	}
+
+	// Update StudyMaterial Details
+	public StudyMaterial updateStudyMaterial(StudyMaterial studyMaterial) {
+		LOG.info("updateStudyMaterial");
+		return studyMaterialRepository.save(studyMaterial);
+	}
+
+	// Delete StudyMaterial
+	public boolean deleteStudyMaterial(int studyId) throws StudyMaterialNotFoundException {
+		if (studyMaterialRepository.existsById(studyId)) {
+			studyMaterialRepository.deleteById(studyId);
+			LOG.info("deleteStudyMaterial");
+			return true;
+		}
+		LOG.error("Given id does not exist to remove StudyMaterial");
+		throw new StudyMaterialNotFoundException("Given id does not exist to remove StudyMaterial");
+	}
+	
+	//Course Functionalitites
+
+	// Add Course
+	public Course addCourse(Course course) {
+		LOG.info("addCourse");
+		try {
+			return courseRepository.save(course);
+		} catch (IllegalArgumentException iae) {
+			LOG.error(iae.getMessage());
+			return null;
+		}
+	}
+
+	public List<Course> getAllCourse() {
+		LOG.info("getAllCourse");
+		return (List<Course>) courseRepository.findAll();
+	}
 
 }

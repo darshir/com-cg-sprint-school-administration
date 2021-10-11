@@ -10,6 +10,8 @@ import com.cg.sprint.school.administration.model.Teacher;
 
 @Repository
 public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
+
+	Teacher getById(int teacherId);
     
 //    List<Teacher> findById(String teacherId);
 //    

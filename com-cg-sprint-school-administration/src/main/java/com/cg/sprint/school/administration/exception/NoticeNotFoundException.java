@@ -9,8 +9,8 @@ public class NoticeNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public NoticeNotFoundException() {
-		super();
+	public NoticeNotFoundException(String str) {
+		super(str);
 	}
 
 }

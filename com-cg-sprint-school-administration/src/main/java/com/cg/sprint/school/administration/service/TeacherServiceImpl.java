@@ -31,6 +31,21 @@ public class TeacherServiceImpl {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TeacherService.class);
 
+	//Login Teacher
+	public String loginTeacher(Teacher teacher) {
+		LOG.info("login Teacher");
+		LOG.info(teacher.toString());
+		Teacher teacher2 = teacherRepository.getById(teacher.getTeacherId());
+		LOG.info(teacher2.toString());
+		if (teacher.getTeacherId()==(teacher2.getTeacherId()) && teacher.getTeacherPassword().equals(teacher2.getTeacherPassword())) {
+			LOG.info(teacher.toString());
+			LOG.info(teacher2.toString());
+			return "Login Succesful";
+		} else {
+			throw new IncorrectLoginCredentialsException("Invalid user name or password.");
+		}
+
+	}
 	// Add Teacher
 	public Teacher addTeacher(Teacher teacher) {
 		LOG.info("addTeacher");
@@ -42,7 +57,7 @@ public class TeacherServiceImpl {
 		}
 	}
 
-	//display all Teachers
+	// display all Teachers
 	public List<Teacher> getAllTeacher() {
 		LOG.info("getAllTeacher");
 		return (List<Teacher>) teacherRepository.findAll();
@@ -54,7 +69,7 @@ public class TeacherServiceImpl {
 		Optional<Teacher> optTeacher = teacherRepository.findById(teacherId);
 		if (optTeacher.isEmpty()) {
 			LOG.error("Teacher not found.");
-			throw new TeacherNotFoundException();
+			throw new TeacherNotFoundException("The teacher with ID " + teacherId + " not found");
 		} else
 			return optTeacher.get();
 	}
@@ -72,30 +87,19 @@ public class TeacherServiceImpl {
 		return teacherId;
 	}
 
-	// Add Course
-	public Course addCourse(Course course) {
-		LOG.info("addCourse");
-		try {
-			return courseRepository.save(course);
-		} catch (IllegalArgumentException iae) {
-			LOG.error(iae.getMessage());
-			return null;
-		}
-	}
-
-	//Display course
+	// Display course
 	public List<Course> getAllCourse() {
 		LOG.info("getAllCourse");
 		return (List<Course>) courseRepository.findAll();
 	}
 
-	//Display Course By Id
+	// Display Course By Id
 	public Course getCourseById(int courseId) throws CourseNotFoundException {
 		LOG.info("getcourseById " + courseId);
 		Optional<Course> optCourse = courseRepository.findById(courseId);
 		if (optCourse.isEmpty()) {
 			LOG.error("Course not found.");
-			throw new CourseNotFoundException();
+			throw new CourseNotFoundException("The course with ID " + courseId + " not found");
 		} else
 			return optCourse.get();
 	}
@@ -124,19 +128,19 @@ public class TeacherServiceImpl {
 		}
 	}
 
-	//Display StudyMaterials
+	// Display StudyMaterials
 	public List<StudyMaterial> getAllStudyMaterial() {
 		LOG.info("getAllStudyMaterial");
 		return (List<StudyMaterial>) studyMaterialRepository.findAll();
 	}
 
-	//Display StudyMaterial By Id
+	// Display StudyMaterial By Id
 	public StudyMaterial getStudyMaterialById(int studyId) throws StudyMaterialNotFoundException {
 		LOG.info("getStudyMaterialById " + studyId);
 		Optional<StudyMaterial> optStudyMaterial = studyMaterialRepository.findById(studyId);
 		if (optStudyMaterial.isEmpty()) {
 			LOG.error("StudyMaterial not found.");
-			throw new StudyMaterialNotFoundException();
+			throw new StudyMaterialNotFoundException("The Study Material with ID " + studyId + " not found");
 		} else
 			return optStudyMaterial.get();
 	}
@@ -165,19 +169,19 @@ public class TeacherServiceImpl {
 		}
 	}
 
-	//Display HomeWork
+	// Display HomeWork
 	public List<Homework> getAllHomework() {
 		LOG.info("getAllHomework");
 		return (List<Homework>) homeworkRepository.findAll();
 	}
 
-	//Display Homework By Id
+	// Display Homework By Id
 	public Homework getHomeworkById(int homeId) throws HomeworkNotFoundException {
 		LOG.info("getHomeworkById " + homeId);
 		Optional<Homework> optHomework = homeworkRepository.findById(homeId);
 		if (optHomework.isEmpty()) {
 			LOG.error("Homework not found.");
-			throw new HomeworkNotFoundException();
+			throw new HomeworkNotFoundException("The Homework with ID " + homeId + " not found");
 		} else
 			return optHomework.get();
 	}

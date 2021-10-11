@@ -8,8 +8,8 @@ public class StudyMaterialNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public StudyMaterialNotFoundException() {
-		super();
+	public StudyMaterialNotFoundException(String str) {
+		super(str);
 	}
 
 }

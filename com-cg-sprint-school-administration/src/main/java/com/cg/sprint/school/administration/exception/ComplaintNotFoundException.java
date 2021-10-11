@@ -8,8 +8,8 @@ public class ComplaintNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public ComplaintNotFoundException() {
-		super();
+	public ComplaintNotFoundException(String str) {
+		super(str);
 	}
 
 }

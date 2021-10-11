@@ -13,28 +13,25 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "COURSE")
 public class Course {
-    
-    @Id
-    @Column(name = "COURSE_ID")
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private int courseId;
-    
-    @NotBlank(message = "Name is mandatory")
-    @Column(name = "name")
-    private String name;
-    
-   
-    @Column(name = "numhrs")
-    private String numhrs;
-    
-  
+
+	@Id
+	@Column(name = "COURSE_ID")
+	// @GeneratedValue(strategy = GenerationType.AUTO)
+	private int courseId;
+
+	@NotBlank(message = "Name is mandatory")
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "numhrs")
+	private String numhrs;
+
 	@ManyToOne
 	@JoinColumn(name = "TEACHER_ID")
-	private Teacher teacher;
-   
-    
-    public Course() {}
+	private Teacher teacherId;
 
+	public Course() {
+	}
 
 	public Course(int courseId, @NotBlank(message = "Name is mandatory") String name, String numhrs) {
 		super();
@@ -43,61 +40,47 @@ public class Course {
 		this.numhrs = numhrs;
 	}
 
-
-	public Course(int courseId, @NotBlank(message = "Name is mandatory") String name, String numhrs, Teacher teacher) {
+	public Course(int courseId, @NotBlank(message = "Name is mandatory") String name, String numhrs,
+			Teacher teacherId) {
 		super();
 		this.courseId = courseId;
 		this.name = name;
 		this.numhrs = numhrs;
-		this.teacher = teacher;
+		this.teacherId = teacherId;
 	}
-
 
 	public int getCourseId() {
 		return courseId;
 	}
 
-
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getNumhrs() {
 		return numhrs;
 	}
 
-
 	public void setNumhrs(String numhrs) {
 		this.numhrs = numhrs;
 	}
 
-
-	public Teacher getTeacher() {
-		return teacher;
+	public Teacher getTeacherId() {
+		return teacherId;
 	}
-
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
-
 
 	@Override
 	public String toString() {
-		return "Course [courseId=" + courseId + ", name=" + name + ", numhrs=" + numhrs + ", teacher=" + teacher + "]";
+		return "Course [courseId=" + courseId + ", name=" + name + ", numhrs=" + numhrs + ", teacher=" + teacherId
+				+ "]";
 	}
-
- 
 
 }

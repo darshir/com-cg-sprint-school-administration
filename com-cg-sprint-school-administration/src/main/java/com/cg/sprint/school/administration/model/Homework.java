@@ -13,26 +13,21 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "HOMEWORK")
 public class Homework {
-    
+
 	@Id
-	@Column(name="HOMEWORK_ID")
-	//@GeneratedValue(strategy = GenerationType.AUTO)
-    private int homeId;
-    
-    
-    @Column(name = "name")
-    private String name;
-    
-	@ManyToOne
-	@JoinColumn(name = "STUDENT_ID")
-	private Student student;
-	
+	@Column(name = "HOMEWORK_ID")
+	// @GeneratedValue(strategy = GenerationType.AUTO)
+	private int homeId;
+
+	@Column(name = "name")
+	private String name;
+
 	@ManyToOne
 	@JoinColumn(name = "TEACHER_ID")
-	private Teacher teacher;
-    
-    public Homework() {
-    }
+	private Teacher teacherId;
+
+	public Homework() {
+	}
 
 	public Homework(int homeId, String name) {
 		super();
@@ -40,19 +35,11 @@ public class Homework {
 		this.name = name;
 	}
 
-	public Homework(int homeId, String name, Student student) {
+	public Homework(int homeId, String name, Teacher teacherId) {
 		super();
 		this.homeId = homeId;
 		this.name = name;
-		this.student = student;
-	}
-
-	public Homework(int homeId, String name, Student student, Teacher teacher) {
-		super();
-		this.homeId = homeId;
-		this.name = name;
-		this.student = student;
-		this.teacher = teacher;
+		this.teacherId = teacherId;
 	}
 
 	public int getHomeId() {
@@ -71,26 +58,13 @@ public class Homework {
 		this.name = name;
 	}
 
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
-	}
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+	public Teacher getTeacherId() {
+		return teacherId;
 	}
 
 	@Override
 	public String toString() {
-		return "Homework [homeId=" + homeId + ", name=" + name + ", student=" + student + ", teacher=" + teacher + "]";
+		return "Homework [homeId=" + homeId + ", name=" + name + ", teacherId=" + teacherId + "]";
 	}
 
-   
 }

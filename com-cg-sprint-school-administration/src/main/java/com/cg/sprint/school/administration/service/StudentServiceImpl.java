@@ -28,6 +28,20 @@ public class StudentServiceImpl {
 	TeacherRepository teacherRepository;
 
 	private static final Logger LOG = LoggerFactory.getLogger(StudentService.class);
+	
+	public String loginStudent(Student student) {
+		LOG.info("login Student");
+		LOG.info(student.toString());
+		Student student2 = studentRepository.getById(student.getStudentId());
+		LOG.info(student2.toString());
+		if (student.getStudentId()==(student2.getStudentId()) && student.getStudentPassword().equals(student2.getStudentPassword())) {
+			LOG.info(student.toString());
+			LOG.info(student2.toString());
+			return "Login Succesful";
+		} else {
+			throw new IncorrectLoginCredentialsException("Invalid user name or password.");
+		}
+	}
 
 	// Add Student
 	public Student addStudent(Student student) {
@@ -52,7 +66,7 @@ public class StudentServiceImpl {
 		Optional<Student> optStudent = studentRepository.findById(studentId);
 		if (optStudent.isEmpty()) {
 			LOG.error("Student not found.");
-			throw new StudentNotFoundException();
+			throw new StudentNotFoundException("The student with ID " + studentId + " not found");
 		} else
 			return optStudent.get();
 	}
@@ -94,7 +108,7 @@ public class StudentServiceImpl {
 		Optional<Complaint> optComplaint = complaintRepository.findById(complaintId);
 		if (optComplaint.isEmpty()) {
 			LOG.error("No Complaint Found.");
-			throw new ComplaintNotFoundException();
+			throw new ComplaintNotFoundException("The complaint with ID " + complaintId + " not found");
 		} else
 			return optComplaint.get();
 	}

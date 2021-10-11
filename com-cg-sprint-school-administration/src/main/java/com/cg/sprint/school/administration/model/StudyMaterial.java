@@ -16,20 +16,16 @@ public class StudyMaterial {
 	
 	@Id
 	@Column(name="STUDY_ID")
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private int studyId;
     
     
     @Column(name = "name")
     private String name;
-    
-	@ManyToOne
-	@JoinColumn(name = "COURSE_ID")
-	private Course course;
 	
 	@ManyToOne
 	@JoinColumn(name = "TEACHER_ID")
-	private Teacher teacher;
+	private Teacher teacherId;
     
     public StudyMaterial() {
     }
@@ -40,19 +36,11 @@ public class StudyMaterial {
 		this.name = name;
 	}
 
-	public StudyMaterial(int studyId, String name, Course course) {
+	public StudyMaterial(int studyId, String name, Teacher teacherId) {
 		super();
 		this.studyId = studyId;
 		this.name = name;
-		this.course = course;
-	}
-
-	public StudyMaterial(int studyId, String name, Course course, Teacher teacher) {
-		super();
-		this.studyId = studyId;
-		this.name = name;
-		this.course = course;
-		this.teacher = teacher;
+		this.teacherId = teacherId;
 	}
 
 	public int getStudyId() {
@@ -71,25 +59,17 @@ public class StudyMaterial {
 		this.name = name;
 	}
 
-	public Course getCourse() {
-		return course;
+	public Teacher getTeacherId() {
+		return teacherId;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
-	}
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+	public void setTeacherId(Teacher teacherId) {
+		this.teacherId = teacherId;
 	}
 
 	@Override
 	public String toString() {
-		return "StudyMaterial [studyId=" + studyId + ", name=" + name + ", course=" + course + ", teacher=" + teacher
+		return "StudyMaterial [studyId=" + studyId + ", name=" + name + ", teacherId=" + teacherId
 				+ "]";
 	}
 

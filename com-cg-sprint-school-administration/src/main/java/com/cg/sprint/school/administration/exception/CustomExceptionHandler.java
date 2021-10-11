@@ -60,4 +60,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
 	}
 	
+	@ExceptionHandler(IncorrectLoginCredentialsException.class)
+	public ResponseEntity<Object> handleIncorrectLoginCredentialsException() {
+		LOG.error("handleIncorrectLoginCredentialsException");
+		return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);
+
+	}
+	
 }

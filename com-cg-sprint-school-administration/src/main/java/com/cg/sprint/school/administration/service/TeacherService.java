@@ -15,6 +15,8 @@ import com.cg.sprint.school.administration.model.Teacher;
 
 public interface TeacherService {
 	
+	public String loginTeacher(Teacher teacher);
+	
 	public Teacher addTeacher(Teacher teacher);
 	
 	public List<Teacher> getAllTeacher();
@@ -24,8 +26,6 @@ public interface TeacherService {
 	public Teacher updateTeacher(Teacher teacher);
 	
 	public int deleteTeacher(int teacherId);
-	
-	public Course addCourse(Course course);
 	
 	public List<Course> getAllCourse();
 	

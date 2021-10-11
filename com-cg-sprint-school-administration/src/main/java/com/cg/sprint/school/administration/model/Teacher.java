@@ -24,34 +24,24 @@ public class Teacher implements Serializable {
 
 	@Id
 	@Column(name = "TEACHER_ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int teacherId;
 
 	@Column(name = "TEACHER_NAME", length = 50)
 	private String teacherName;
-	
-	@ManyToOne
-	@JoinColumn(name = "ADMIN_ID")
-	private Admin admin;
 
-//	@Column(name = "TEACHER_PASSWORD")
-//	private String teacherPassword;
+	@Column(name = "TEACHER_PASSWORD")
+	private String teacherPassword;
 
 	public Teacher() {
 
 	}
 
-	public Teacher(int teacherId, String teacherName) {
+	public Teacher(int teacherId, String teacherName, String teacherPassword) {
 		super();
 		this.teacherId = teacherId;
 		this.teacherName = teacherName;
-	}
-
-	public Teacher(int teacherId, String teacherName, Admin admin) {
-		super();
-		this.teacherId = teacherId;
-		this.teacherName = teacherName;
-		this.admin = admin;
+		this.teacherPassword = teacherPassword;
 	}
 
 	public int getTeacherId() {
@@ -70,19 +60,18 @@ public class Teacher implements Serializable {
 		this.teacherName = teacherName;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public String getTeacherPassword() {
+		return teacherPassword;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setTeacherPassword(String teacherPassword) {
+		this.teacherPassword = teacherPassword;
 	}
 
 	@Override
 	public String toString() {
-		return "Teacher [teacherId=" + teacherId + ", teacherName=" + teacherName + ", admin=" + admin + "]";
+		return "Teacher [teacherId=" + teacherId + ", teacherName=" + teacherName 
+				+ ", teacherPassword=" + teacherPassword + "]";
 	}
-
-
 
 }

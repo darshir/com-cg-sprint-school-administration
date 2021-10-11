@@ -8,8 +8,8 @@ public class TeacherNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public TeacherNotFoundException() {
-		super();
+	public TeacherNotFoundException(String str) {
+		super(str);
 	}
 
 }

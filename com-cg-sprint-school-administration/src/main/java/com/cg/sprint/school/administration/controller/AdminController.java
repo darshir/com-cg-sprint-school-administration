@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.sprint.school.administration.exception.IncorrectLoginCredentialsException;
 import com.cg.sprint.school.administration.exception.AdminNotFoundException;
 import com.cg.sprint.school.administration.exception.ComplaintNotFoundException;
 import com.cg.sprint.school.administration.exception.CourseNotFoundException;
@@ -42,6 +43,7 @@ import com.cg.sprint.school.administration.service.TeacherService;
 import com.cg.sprint.school.administration.service.TeacherServiceImpl;
 
 @RestController
+@RequestMapping(path = "school-admin/admin")
 public class AdminController {
 
 	@Autowired
@@ -63,12 +65,18 @@ public class AdminController {
 	private TeacherServiceImpl studyMaterialService;
 
 	@Autowired
-	private TeacherServiceImpl courseService;
+	private AdminServiceImpl courseService;
 
 	@Autowired
 	private AdminServiceImpl noticeService;
 
 	private static final Logger LOG = LoggerFactory.getLogger(AdminController.class);
+
+	@PostMapping(path = "/loginAdmin")
+	public String loginAdmin(@RequestBody Admin admin) {
+		LOG.info("loginAdmin");
+		return this.adminService.loginAdmin(admin);
+	}
 
 	// http://localhost:8082/addAdmin
 	@PostMapping("/addAdmin")
@@ -94,7 +102,6 @@ public class AdminController {
 		return new ResponseEntity<Admin>(adm, HttpStatus.OK);
 
 	}
-
 
 	// http://localhost:8082/addStudent
 	@PostMapping("/addStudent")
@@ -233,18 +240,24 @@ public class AdminController {
 
 	// http://localhost:8082/deleteNotice/{noticeId}
 	@DeleteMapping("/deleteNotice/{noticeId}")
-	public int deleteNotice(@PathVariable int noticeId) {
+	public boolean deleteNotice(@PathVariable int noticeId) {
 		LOG.info("deleteNotice");
 
-		return noticeService.deleteNotice(noticeId);
+		return noticeService.removeNotice(noticeId);
 
+	}
+
+	// http://localhost:8082/admin/addCourse
+	@PostMapping("/addCourse")
+	public Course addCourse(@RequestBody Course course) {
+		LOG.info("addCourse");
+		return courseService.addCourse(course);
 	}
 
 	// http://localhost:8082/getAllCourse
 	@GetMapping("/getAllCourse")
 	public List<Course> getAllCourse() {
 		LOG.info("getAllCourse");
-
 		return courseService.getAllCourse();
 
 	}
@@ -270,26 +283,8 @@ public class AdminController {
 	@DeleteMapping("/deleteStudyMaterial/{studyId}")
 	public int deleteStudyMaterial(@PathVariable int studyId) {
 		LOG.info("deleteStudyMaterial");
-
 		return studyMaterialService.deleteCourse(studyId);
 
-	}
-
-	// http://localhost:8082/getHomework
-	@GetMapping("/getHomework")
-	public List<Homework> getAllHomework() {
-		LOG.info("getAllHomework");
-
-		return homeworkService.getAllHomework();
-
-	}
-
-	// http://localhost:8082/getHomeworkById/1
-	@GetMapping("/getHomeworkById/{homeId}")
-	public ResponseEntity<Homework> getHomeworkById(@PathVariable int homeId) {
-		LOG.info("getHomework");
-		Homework hw = homeworkService.getHomeworkById(homeId);
-		return new ResponseEntity<Homework>(hw, HttpStatus.OK);
 	}
 
 }

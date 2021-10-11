@@ -15,6 +15,8 @@ import com.cg.sprint.school.administration.model.Student;
 
 public interface StudentService {
 	
+	public String loginStudent(Student student);
+	
 	public Student addStudent(Student student);
 	
 	public List<Student> getAllStudent();

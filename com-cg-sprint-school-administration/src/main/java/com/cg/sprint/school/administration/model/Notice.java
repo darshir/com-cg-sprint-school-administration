@@ -1,5 +1,7 @@
 package com.cg.sprint.school.administration.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,26 +15,23 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "NOTICE")
 public class Notice {
-    
-    @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private int noticeId;
-    
-    @NotBlank(message = "Name is mandatory")
-    @Column(name = "name")
-    private String name;
-    
-       @Column(name = "date")
-    private String date;
 
-    @Column(name="notice")
-    private String notice;
-    
-    @ManyToOne
-	@JoinColumn(name = "ADMIN_ID")
-	private Admin admin;
-    
-    public Notice() {}
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int noticeId;
+
+	@NotBlank(message = "Name is mandatory")
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "date")
+	private String date;
+
+	@Column(name = "notice")
+	private String notice;
+
+	public Notice() {
+	}
 
 	public Notice(int noticeId, @NotBlank(message = "Name is mandatory") String name, String date, String notice) {
 		super();
@@ -40,16 +39,6 @@ public class Notice {
 		this.name = name;
 		this.date = date;
 		this.notice = notice;
-	}
-
-	public Notice(int noticeId, @NotBlank(message = "Name is mandatory") String name, String date, String notice,
-			Admin admin) {
-		super();
-		this.noticeId = noticeId;
-		this.name = name;
-		this.date = date;
-		this.notice = notice;
-		this.admin = admin;
 	}
 
 	public int getNoticeId() {
@@ -84,21 +73,9 @@ public class Notice {
 		this.notice = notice;
 	}
 
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
 	@Override
 	public String toString() {
-		return "Notice [noticeId=" + noticeId + ", name=" + name + ", date=" + date + ", notice=" + notice + ", admin="
-				+ admin + "]";
+		return "Notice [noticeId=" + noticeId + ", name=" + name + ", date=" + date + ", notice=" + notice + "]";
 	}
-    
-    
-  
-   
+
 }
