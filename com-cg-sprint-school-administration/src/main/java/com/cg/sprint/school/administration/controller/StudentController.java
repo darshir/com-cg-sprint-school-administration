@@ -63,7 +63,9 @@ public class StudentController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(StudentController.class);
 	
-	@PostMapping(path = "/loginStudent")
+	
+	// http://localhost:8082/student/loginStudent
+	@PostMapping(path = "/student/loginStudent")
 	public String loginStudent(@RequestBody Student student) {
 		LOG.info("loginStudent");
 		return this.studentService.loginStudent(student);
