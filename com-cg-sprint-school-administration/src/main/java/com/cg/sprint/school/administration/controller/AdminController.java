@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,7 @@ import com.cg.sprint.school.administration.service.TeacherService;
 import com.cg.sprint.school.administration.service.TeacherServiceImpl;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "school-admin/admin")
 public class AdminController {
 
@@ -71,14 +73,24 @@ public class AdminController {
 	private AdminServiceImpl noticeService;
 
 	private static final Logger LOG = LoggerFactory.getLogger(AdminController.class);
-
-	@PostMapping(path = "/loginAdmin")
-	public String loginAdmin(@RequestBody Admin admin) {
-		LOG.info("loginAdmin");
-		return this.adminService.loginAdmin(admin);
+	
+	
+	// http://localhost:8082/school-admin/admin/loginAdmin
+//	@PostMapping(path = "/loginAdmin")
+//	public String loginAdmin(@RequestBody Admin admin) {
+//		LOG.info("loginAdmin");
+//		return this.adminService.loginAdmin(admin);
+//	}
+	
+	@PostMapping(path = "/AdminLogin")
+	public ResponseEntity<Admin> adminLogin(@RequestBody Admin admin) throws IncorrectLoginCredentialsException {
+		LOG.info("adminLogin Controller");
+		Admin result = adminService.loginAdmin(admin.getAdminId(), admin.getAdminPassword());
+		ResponseEntity<Admin> response = new ResponseEntity<>(result, HttpStatus.OK);
+		return response;
 	}
 
-	// http://localhost:8082/addAdmin
+	// http://localhost:8082/school-admin/admin/addAdmin
 	@PostMapping("/addAdmin")
 	public Admin addAdmin(@RequestBody Admin admin) {
 		LOG.info("addAdmin");

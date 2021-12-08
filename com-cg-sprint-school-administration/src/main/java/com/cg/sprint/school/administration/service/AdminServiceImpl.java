@@ -44,7 +44,8 @@ public class AdminServiceImpl {
 
 	// Admin Functionalities
 
-	// Login Function for Admin
+
+	
 //	public String loginAdmin(Admin admin) {
 //		LOG.info("login Admin");
 //		LOG.info(admin.toString());
@@ -60,19 +61,18 @@ public class AdminServiceImpl {
 //
 //	}
 	
-	public String loginAdmin(Admin admin) {
-		LOG.info("login Admin");
-		LOG.info(admin.toString());
-		Admin admin2 = adminRepository.getById(admin.getAdminId());
-		LOG.info(admin2.toString());
-		if (admin.getAdminId()==(admin2.getAdminId()) && admin.getAdminPassword().equals(admin2.getAdminPassword())) {
-			LOG.info(admin.toString());
-			LOG.info(admin2.toString());
-			return "Login Succesful";
-		} else {
-			throw new IncorrectLoginCredentialsException("Invalid user name or password.");
-		}
+	public Admin loginAdmin(int adminId, String password) throws IncorrectLoginCredentialsException {
 
+		Admin admin = null;
+
+		if (adminRepository.existsById(adminId)
+				&& adminRepository.findById(adminId).get().getAdminPassword().equals(password)) {
+			admin = adminRepository.findById(adminId).get();
+			LOG.info("Admin login is  successfull");
+			return admin;
+		}
+		LOG.equals("Incorrect Details");
+		throw new IncorrectLoginCredentialsException("Invalid Credentials");
 	}
 
 	// Add Admin

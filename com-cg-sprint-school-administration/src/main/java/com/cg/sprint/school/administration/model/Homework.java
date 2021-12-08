@@ -58,6 +58,11 @@ public class Homework {
 		this.name = name;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Homework [homeId=" + homeId + ", name=" + name + "]";
+//	}
+
 	public Teacher getTeacherId() {
 		return teacherId;
 	}
@@ -66,5 +71,6 @@ public class Homework {
 	public String toString() {
 		return "Homework [homeId=" + homeId + ", name=" + name + ", teacherId=" + teacherId + "]";
 	}
+	
 
 }
