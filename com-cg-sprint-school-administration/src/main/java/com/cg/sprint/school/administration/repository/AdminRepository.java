@@ -16,6 +16,6 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
 	Admin getById(int adminId);
 	
-
+   
 	
 }

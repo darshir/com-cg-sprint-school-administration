@@ -97,7 +97,7 @@ public class AdminController {
 		return adminService.addAdmin(admin);
 	}
 
-	// http://localhost:8082/getAllAdmin
+	// http://localhost:8082/school-admin/admin/getAllAdmin
 	@GetMapping("/getAllAdmin")
 	public List<Admin> getAllAdmin() {
 		LOG.info("getAllDep");
